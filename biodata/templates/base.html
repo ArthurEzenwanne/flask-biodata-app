@@ -1,28 +1,72 @@
-<!doctype html>
-<title>{% block title %}{% endblock %} - Biodata APP</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav >
-  <h1><a href="{{ url_for('index') }}">FlaskApp</a></h1>
-  <div class="container-fluid">
-    <div >
-      <ul>
-        {% if g.user %}
-          <li><span>{{ g.user['username'] }}</span>
-          <li><a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
-        {% else %}
-          <li><a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
-          <li><a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a>
-        {% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %} - Biodata APP</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+  {% block stylesheet %}{% endblock %}
+  <style>
+    /* Show it is fixed to the top */
+    body {
+      min-height: 75rem;
+      padding-top: 4.5rem;
+    }
+  </style>
+
+</head>
+<body>  
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="{{ url_for('index') }}">BioData</a>    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- if user is logged in -->
+    {% if g.user %}
+      <div class="collapse navbar-collapse container-fluid" id="navbarCollapse">
+        <!-- <ul class="navbar-nav ms-auto"> -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item active"><a class="nav-link" href="{{ url_for('student.dashboard') }}">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('student.biodata') }}">Biodata</a></li>
+          <!-- should only show for course reps -->
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('student.coursemates') }}">Coursemates</a></li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('student.dashboard') }}"><span class="navbar-text">{{ g.user['email'] }}</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
+    {% else %}
+    <!-- user is not logged in -->
+    <div class="collapse navbar-collapse container-fluid" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item active"><a class="nav-link" href="{{ url_for('student.dashboard') }}">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('student.biodata') }}">Biodata</a></li>
+        <!-- should only show for course reps -->
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('student.coursemates') }}">Coursemates</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}"><span class="glyphicon glyphicon-log-out"></span> Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}"><span class="glyphicon glyphicon-log-out"></span> Login</a></li>
       </ul>
     </div>
-  </div>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-</section>
+    {% endif %}
+    </div>
+  </nav>
+  <!-- sections -->
+  <div class="content">
+    {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %}
+    <h1>Welcome to the Student Biodata App</h1>
+    {% endblock %}
+  </div> 
+  
+  <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='bootstrap.js') }}"></script> 
+</body>
+</html>

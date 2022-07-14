@@ -54,7 +54,7 @@ def create_app(test_config=None):
     def index():
         """Show all the posts, most recent first."""
         
-        return  "Hello, World at homepage!"
+        return render_template("/base.html")
 
     
     # UPLOAD_FOLDER = "./static/uploads/"

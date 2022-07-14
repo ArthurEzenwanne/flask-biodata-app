@@ -62,3 +62,27 @@ def upload_biodata():
             return redirect(url_for('download_file', name=filename))
 
     return render_template("student/upload.html")
+
+
+@bp.route("/dashboard", methods=("GET", "POST"))
+@login_required
+def dashboard():
+    """View controller for the dashboard view for the current user."""
+
+    return render_template("student/dashboard.html")
+
+
+@bp.route("/biodata", methods=("GET", "POST"))
+@login_required
+def biodata():
+    """View controller for the biodata view for the current user."""
+
+    return render_template("student/biodata.html")
+
+
+@bp.route("/coursemates", methods=("GET", "POST"))
+@login_required
+def coursemates():
+    """View controller for the coursemates view for the current user."""
+
+    return render_template("student/coursemates.html")
