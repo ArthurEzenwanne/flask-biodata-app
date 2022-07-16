@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% block title %}Fill Biodata{% endblock %}
+{% block stylesheet %}
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+
+  .b-example-divider {
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+  }
+
+  .b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+  }
+
+  .bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+  }
+
+  .nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+  }
+
+  .nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <main>
+    <div class="row g-5">
+      <form class="needs-validation" novalidate method="post" enctype="multipart/form-data">
+        <h4 class="mb-3">Fill Biodata</h4>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row g-3">
+                <!-- first name -->
+                <div class="col-md-6">
+                  <label for="first_name" class="form-label">First name</label>
+                  <input type="text" class="form-control" name="first_name" placeholder="ex: Chinedu" value="" required>
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
+                <!-- middle name -->
+                <div class="col-md-6">
+                  <label for="middle_name" class="form-label">Middle name</label>
+                  <input type="text" class="form-control" name="middle_name" placeholder="" value="" required>
+                  <div class="invalid-feedback">
+                    Valid middle name is required.
+                  </div>
+                </div>
+                <!-- lastname -->
+                <div class="col-12">
+                  <label for="last_name" class="form-label">Lastname</label>
+                  <input type="text" class="form-control" name="last_name" placeholder="Lastname" required>
+                  <div class="invalid-feedback">
+                    Your lastname is required.
+                  </div>
+                </div>
+                <!-- dob -->
+                <div class="col-md-6">
+                  <label for="dob" class="form-label">DOB</label>
+                  <input type="date" class="form-control" name="dob" required>
+                  <div class="invalid-feedback">
+                    Please select a valid date.
+                  </div>
+                </div>
+                <!-- phone -->
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input type="tel" class="form-control" name="phone">
+                </div>
+              </div>
+              <hr class="my-4">
+              <!-- is rep -->
+              <!-- <div class="form-check col-md-12">
+                <input type="checkbox" class="form-check-input" name="is_rep">
+                <label class="form-check-label" for="is_rep">Class Rep</label>
+              </div> -->
+              <div class="col-md-12">
+                <label for="passport_url" class="">Passport Image</label>
+                <input type="file" name="passport_url" id="passport_url">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row g-3">
+                <!-- reg number -->
+                <div class="col-sm-6">
+                  <label for="reg_num" class="form-label">Reg Number</label>
+                  <input type="text" class="form-control" name="reg_num" placeholder="" value="" required>
+                  <div class="invalid-feedback">
+                    Valid reg number is required.
+                  </div>
+                </div>
+                <!-- dept -->
+                <div class="col-md-6">
+                  <label for="dept" class="form-label">Department</label>
+                  <select class="form-select" name="dept" required>
+                    <option value="">Choose...</option>
+                    <option value="Radiography">Radiography</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Human Kinetics">Human Kinetics</option>
+                    <option value="Geology">Geology</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid Department.
+                  </div>
+                </div>
+                <!-- faculty -->
+                <div class="col-md-6">
+                  <label for="faculty" class="form-label">Faculty</label>
+                  <select class="form-select" name="faculty" required>
+                    <option value="">Choose...</option>
+                    <option value="Health Science">Health Science</option>
+                    <option value="Physical Science">Physical Science</option>
+                    <option value="Education">Education</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid Faculty.
+                  </div>
+                </div>
+                <!-- level -->
+                <div class="col-md-6">
+                  <label for="level" class="form-label">Level</label>
+                  <select class="form-select" name="level" required>
+                    <option value="">Choose...</option>
+                    <option value="100L">100 Level</option>
+                    <option value="200L">200 Level</option>
+                    <option value="300L">300 Level</option>
+                    <option value="400L">400 Level</option>
+                    <option value="500L">500 Level</option>
+                    <option value="600L">600 Level</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a valid Level.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4">
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
+      </form>
+    </div>
+  </main>
+</div>
+
+<footer class="my-5 pt-5 text-muted text-center text-small">
+  <p class="mb-1">&copy; 2022</p>
+</footer>
+{% endblock %}
