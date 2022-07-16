@@ -71,9 +71,7 @@
     {% block content %}
     <div class="text-center"><h1>Welcome to the Student Biodata App</h1></div>
       {% if g.user %}
-        {% for record in data %}
-        <div class="text-center"><h2>You are logged in as {{ record }}</h2></div>
-        {% endfor %}     
+      <div class="text-center"><h2>You are logged in as {{ g.user['email'] }}</h2></div>   
       {% else %}
       <div class="text-center"><h2>You are not logged in</h2></div>
       {% endif %}

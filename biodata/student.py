@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, flash, g, redirect, render_template, request, send_from_directory, url_for
+from flask import Blueprint, flash, g, redirect, render_template, request, send_from_directory, session, url_for
 from werkzeug.exceptions import abort
 from werkzeug.utils import secure_filename
 
@@ -20,9 +20,26 @@ def allowed_file(filename):
 @login_required
 def dashboard():
     """View controller for the dashboard view for the current user."""
+    if request.method == 'GET' and session:
+        # test if user has filled biodata
+        db = get_db()
+        user = db.execute(
+            "SELECT * FROM students WHERE user_id = ?", (session['user_id'],)
+        ).fetchone()
 
-    return render_template("student/dashboard.html")
+        if user is None:
+            error = "You have not filled your biodata yet. Redirected..."
+            flash(error)
+            return redirect(url_for("student.biodata"))
+        
+        # create dict to hold db row values 
+        data = dict()
+        for key in user.keys():
+            data[key] = user[key]
+        print(data)
 
+        return render_template("student/dashboard.html", data=data)
+    
 
 @bp.route("/biodata", methods=("GET", "POST"))
 @login_required
