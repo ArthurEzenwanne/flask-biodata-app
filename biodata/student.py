@@ -38,7 +38,8 @@ def dashboard():
             data[key] = user[key]
         print(data)
 
-        return render_template("student/dashboard.html", data=data)
+        return render_template("student/dashboard.html", data=data)   # render template with data
+    return render_template("student/dashboard.html")                  # render template without data
     
 
 @bp.route("/biodata", methods=("GET", "POST"))
@@ -98,5 +99,25 @@ def biodata():
 @login_required
 def coursemates():
     """View controller for the coursemates view for the current user."""
+    # test if user is logged in and session exists
+    if request.method == "GET" and session:
+        # get the dept of logged in user and get all students in that dept
+        db = get_db()
+        # get the user dept (we want to also test that the user is a rep)
+        rep_dept = db.execute(
+            "SELECT dept FROM students WHERE user_id = ?", (session['user_id'],)
+        ).fetchone()
+
+        if rep_dept is None:
+            error = "You have not filled your biodata yet. Redirected..."
+            flash(error)
+            return redirect(url_for("student.biodata"))
+
+        # now select from the db all students in the same dept
+        coursemates = db.execute(
+            "SELECT first_name, middle_name, last_name, reg_num, phone, passport_url, u.email FROM students s JOIN user u ON u.id = s.user_id WHERE dept = ? AND u.email != ?", (rep_dept['dept'], g.user['email'])
+        ).fetchall()
+
+        return render_template("student/coursemates.html", data=coursemates)
 
     return render_template("student/coursemates.html")

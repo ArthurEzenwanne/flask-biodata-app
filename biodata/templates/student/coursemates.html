@@ -6,6 +6,65 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
+  <h4 class="mb-3">Coursemates</h4>
+</div>
+{% for data in data %}
+<div class="container">
+  <main>
+    <div class="row g-5">
+      <form class="needs-validation" novalidate method="post">
+        <div class="col-md-12">
+          <div class="row">
+            <!-- passport_url -->
+            <div class="col-md-4">
+              <!-- <div class="row g-3"> -->
+                <div class="card bg-dark text-white">
+                  <img class="card-img" src="{{ url_for('static', filename=data['passport_url']) }}" alt="{{ data['first_name']}} passport image">
+                </div>
+              <!-- </div> -->
+            </div>
+            <!-- other biodata details -->
+            <div class="col-md-8">
+              <!-- full name -->
+              <div class="row g-3 mb-3">
+                <label for="full_name" class="col-sm-2 col-form-label">Full Name: </label> 
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="full_name" value="{{data['first_name'] + ' ' + data['middle_name'] + ' ' + data['last_name']}}" disabled>
+                </div>
+              </div>
+              <!-- reg number -->
+              <div class="row g-3 mb-3">
+                <label for="reg_num" class="col-sm-2 col-form-label">Reg Number: </label> 
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="reg_num" value="{{data['reg_num']}}" disabled>
+                </div>
+              </div>
+              <!-- phone -->
+              <div class="row g-3 mb-3">
+                <label for="phone" class="col-sm-2 col-form-label">Phone Number: </label> 
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="phone" value="{{data['phone']}}" disabled>
+                </div>
+              </div>
+              <!-- faculty -->
+              <div class="row g-3 mb-3">
+                <label for="email" class="col-sm-2 col-form-label">Email: </label> 
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" name="email" value="{{data['email']}}" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="btn btn-outline-primary" role="button" href="{{ url_for('index') }}">View Coursemate</a>
+      </form>
+    </div>
+  </main>
+</div>
+  {% if not loop.last %}
+    <hr>
+  {% endif %}
+{% endfor %}
 <footer class="my-5 pt-5 text-muted text-center text-small">
   <p class="mb-1">&copy; 2022</p>
 </footer>
