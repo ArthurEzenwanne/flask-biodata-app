@@ -60,7 +60,7 @@
   <main>
     <div class="row g-5">
       <form class="needs-validation" method="post" enctype="multipart/form-data">
-        <h4 class="mb-3">Fill Biodata</h4>
+        <h4 class="mb-3">Update Biodata</h4>
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-6">
@@ -68,7 +68,7 @@
                 <!-- first name -->
                 <div class="col-md-6">
                   <label for="first_name" class="form-label">First name</label>
-                  <input type="text" class="form-control" name="first_name" placeholder="ex: Chinedu" value="" required>
+                  <input type="text" class="form-control" name="first_name" placeholder="ex: Chinedu" value="{{data['first_name']}}" required>
                   <div class="invalid-feedback">
                     Valid first name is required.
                   </div>
@@ -76,7 +76,7 @@
                 <!-- middle name -->
                 <div class="col-md-6">
                   <label for="middle_name" class="form-label">Middle name</label>
-                  <input type="text" class="form-control" name="middle_name" placeholder="" value="" required>
+                  <input type="text" class="form-control" name="middle_name" placeholder="" value="{{data['middle_name']}}" required>
                   <div class="invalid-feedback">
                     Valid middle name is required.
                   </div>
@@ -84,7 +84,7 @@
                 <!-- lastname -->
                 <div class="col-12">
                   <label for="last_name" class="form-label">Lastname</label>
-                  <input type="text" class="form-control" name="last_name" placeholder="Lastname" required>
+                  <input type="text" class="form-control" name="last_name" placeholder="Lastname" value="{{data['last_name']}}" required>
                   <div class="invalid-feedback">
                     Your lastname is required.
                   </div>
@@ -92,7 +92,7 @@
                 <!-- dob -->
                 <div class="col-md-6">
                   <label for="dob" class="form-label">DOB</label>
-                  <input type="date" class="form-control" name="dob" required>
+                  <input type="date" class="form-control" name="dob" value="{{data['dob']}}" required>
                   <div class="invalid-feedback">
                     Please select a valid date.
                   </div>
@@ -100,11 +100,12 @@
                 <!-- phone -->
                 <div class="col-md-6">
                   <label for="phone" class="form-label">Phone</label>
-                  <input type="tel" class="form-control" name="phone">
+                  <input type="tel" class="form-control" name="phone" value="{{data['phone']}}">
                 </div>
               </div>
               <hr class="my-4">
               <!-- is rep -->
+              <!-- student should make a research how to preselect a checkbox -->
               <div class="form-check col-md-12">
                 <input type="checkbox" class="form-check-input" name="is_rep">
                 <label class="form-check-label" for="is_rep">Class Rep</label>
@@ -119,7 +120,7 @@
                 <!-- reg number -->
                 <div class="col-sm-6">
                   <label for="reg_num" class="form-label">Reg Number</label>
-                  <input type="text" class="form-control" name="reg_num" placeholder="" value="" required>
+                  <input type="text" class="form-control" name="reg_num" placeholder="" value="{{data['reg_num']}}" required>
                   <div class="invalid-feedback">
                     Valid reg number is required.
                   </div>
@@ -127,6 +128,7 @@
                 <!-- dept -->
                 <div class="col-md-6">
                   <label for="dept" class="form-label">Department</label>
+                  <!-- student should make a research how to preselect a dropdown -->
                   <select class="form-select" name="dept" required>
                     <option value="">Choose...</option>
                     <option value="Radiography">Radiography</option>
@@ -141,6 +143,7 @@
                 <!-- faculty -->
                 <div class="col-md-6">
                   <label for="faculty" class="form-label">Faculty</label>
+                  <!-- student should make a research how to preselect a dropdown -->
                   <select class="form-select" name="faculty" required>
                     <option value="">Choose...</option>
                     <option value="Health Science">Health Science</option>
@@ -154,6 +157,7 @@
                 <!-- level -->
                 <div class="col-md-6">
                   <label for="level" class="form-label">Level</label>
+                  <!-- student should make a research how to preselect a dropdown -->
                   <select class="form-select" name="level" required>
                     <option value="">Choose...</option>
                     <option value="100L">100 Level</option>
@@ -172,7 +176,7 @@
           </div>
         </div>
         <hr class="my-4">
-        <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Update Biodata</button>
       </form>
     </div>
   </main>
