@@ -42,7 +42,7 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "Hello World, << $DEV_NAME >> !" > ~/output.txt
+      - run: echo "Hello World, \<< $DEV_NAME \>> !" > ~/output.txt
       - persist_to_workspace:
           root: ~/
           paths:
