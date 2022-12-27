@@ -43,23 +43,23 @@ jobs:
           # This assumes pytest is installed via the install-package step above
           command: python -m pytest
 
-  save_hello_world_output:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: echo "Hello World, $DEV_NAME !" > ~/output.txt
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - output.txt
+  # save_hello_world_output:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - run: echo "Hello World, $DEV_NAME !" > ~/output.txt
+  #     - persist_to_workspace:
+  #         root: ~/
+  #         paths:
+  #           - output.txt
 
-  print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: cat ~/output.txt
+  # print_output_file:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - attach_workspace:
+  #         at: ~/
+  #     - run: cat ~/output.txt
 
   print_pipeline_id:
     docker:
@@ -74,7 +74,8 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
+      # - save_hello_world_output
+      # - print_output_file:
+      #     requires:
+      #       - save_hello_world_output
+      - print_pipeline_id
