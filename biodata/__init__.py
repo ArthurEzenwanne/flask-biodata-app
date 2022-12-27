@@ -49,6 +49,12 @@ def create_app(test_config=None):
         
         return render_template("/base.html")
 
+    @app.route("/hello")
+    def hello():
+        """A sample hello world!."""
+        
+        return "Hello World!"
+
     app.add_url_rule(
         "/uploads/<name>", endpoint="download_file", build_only=True
     )
