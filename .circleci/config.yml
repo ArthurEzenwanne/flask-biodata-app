@@ -2,6 +2,11 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    steps:
+      - run: echo $CIRCLE_WORKFLOW_ID
+
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
 # See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
@@ -42,7 +47,7 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "Hello World, \<< $DEV_NAME \>> !" > ~/output.txt
+      - run: echo "Hello World, $DEV_NAME !" > ~/output.txt
       - persist_to_workspace:
           root: ~/
           paths:
@@ -55,6 +60,12 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
+
+  print_pipeline_id:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - print_pipeline_id
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
